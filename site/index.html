@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ncm-lab</title>
+  <meta name="description" content="Browser demos of Next-Concept Modeling by Yasiru Rangana.">
+  <link rel="icon" href="/favicon.svg">
+  <link rel="stylesheet" href="/shared/styles.css">
+</head>
+<body>
+  <div class="wrap">
+    <header id="hdr"></header>
+    <h1>Next-Concept Modeling demos</h1>
+    <p class="lead">Small models that write the whole answer at once, then refine it. They run in your browser.</p>
+
+    <ul class="ls">
+      <li><a href="/playground/">Sudoku in 12 passes</a><span>watch a model solve a puzzle and fix its own mistakes</span><span class="st live">try it</span></li>
+      <li><span>Sinhala to English</span><span>a small translator</span><span class="st">planned</span></li>
+      <li><span>More puzzles</span><span>nonograms, KenKen, timetables</span><span class="st">planned</span></li>
+    </ul>
+
+    <footer class="foot">
+      NCM by Hazy Research and Together AI (MIT). ONNX exports by mrfakename (MIT). <a href="/playground/#about">about</a> · <a href="https://yasirurangana.com">yasirurangana.com</a> · <a href="https://github.com/yrangana">github</a>
+    </footer>
+  </div>
+  <script type="module">
+    import { mountHeader } from "/shared/lab.js";
+    mountHeader(document.getElementById("hdr"));
+  </script>
+</body>
+</html>

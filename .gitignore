@@ -1,0 +1,16 @@
+site/vendor/
+research/upstream/ncm/
+research/**/data/
+research/**/checkpoints/
+docs/
+*.onnx
+*.onnx.data
+*.pt
+__pycache__/
+.venv/
+.env
+.DS_Store
+node_modules/
+.models/
+.vercel/
+.env*

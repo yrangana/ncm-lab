@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sudoku in 12 passes · ncm-lab</title>
+  <meta name="description" content="Watch a small Next-Concept Model solve Sudoku in 12 passes, in your browser.">
+  <link rel="icon" href="/favicon.svg">
+  <link rel="stylesheet" href="/shared/styles.css">
+</head>
+<body>
+  <div class="wrap">
+    <header id="hdr"></header>
+    <h1>Sudoku in 12 passes</h1>
+    <p class="lead">A small model fills in the whole grid at once, then corrects it over 12 passes. It runs on your device. <a href="#about">How it works</a></p>
+
+    <section id="sudoku"></section>
+
+    <section class="prose about" id="about">
+      <h2>About this demo</h2>
+      <p>Most language models write one token at a time. A Next-Concept Model drafts the whole answer at once, then corrects it. Here it fills all 81 cells in the first pass, mostly wrong, and fixes them over the next 11. Watch the red cells disappear.</p>
+      <p>The model runs once and returns all 12 passes, then the page plays them back. It runs in your browser, so your puzzle never leaves your device. Each difficulty is a separate model of about 150 MB, downloaded once.</p>
+      <p>Based on <a href="https://arxiv.org/abs/2610.14162">Kumbong et al., 2026</a> (<a href="https://github.com/HazyResearch/ncm">code</a>). Models exported to ONNX by <a href="https://huggingface.co/mrfakename/ncm-webgpu-weights">mrfakename</a>. Both MIT.</p>
+    </section>
+
+    <footer class="foot">
+      NCM by Hazy Research and Together AI (MIT). ONNX exports by mrfakename (MIT). <a href="/playground/#about">about</a> · <a href="https://yasirurangana.com">yasirurangana.com</a> · <a href="https://github.com/yrangana">github</a>
+    </footer>
+  </div>
+  <script type="module" src="./main.js"></script>
+</body>
+</html>
