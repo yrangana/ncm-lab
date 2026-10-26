@@ -1,4 +1,5 @@
 import { loadTask, mulberry32, toNumbers } from "/shared/lab.js";
+import { player } from "/shared/player.js";
 import { CLUES, conflicts, countClues, decodeLevels, encodeBoard, generate, isSolved } from "./sudoku-core.js";
 
 export function mountSudoku(root) {
@@ -41,11 +42,8 @@ export function mountSudoku(root) {
   const $ = (s) => root.querySelector(`[data-${s}]`);
   let puzzle = Array(81).fill(0);
   let levels = [];
-  let timer = null;
-  let runMs = 0;
-  let cur = -1;
-  let speed = "real";
   const sessions = {};
+  const playback = player(root, drawLevel);
   let seed = 7;
 
   const cellClass = (i) => `cell${i % 9 === 2 || i % 9 === 5 ? " bx" : ""}${Math.floor(i / 9) === 2 || Math.floor(i / 9) === 5 ? " by" : ""}`;
@@ -64,13 +62,9 @@ export function mountSudoku(root) {
   }
 
   function drawLevel(k) {
-    if (!levels.length) return;
-    cur = k;
     const b = levels[k];
     const prev = k ? levels[k - 1] : null;
     const bad = conflicts(b);
-    $("slider").value = String(k + 1);
-    $("lvl").textContent = `pass ${k + 1} of ${levels.length}`;
     $("output").innerHTML = `<div class="board">${b.map((v, i) => {
       const cls = [cellClass(i), puzzle[i] ? "clue" : "gen", bad.has(i) ? "bad" : "", prev && prev[i] !== v ? "changed" : ""].join(" ");
       return `<div class="${cls}">${v || ""}</div>`;
@@ -79,22 +73,6 @@ export function mountSudoku(root) {
     const verdict = isSolved(b, puzzle) ? "<b class='ok'>solved</b>" : "<b class='no'>not solved</b>";
     const n = bad.size;
     $("stats").innerHTML = `${n ? `${n} ${n === 1 ? "cell breaks" : "cells break"} a rule` : "no rule breaks"}${last ? ` · ${verdict}` : ""}`;
-  }
-
-  function stop() {
-    clearInterval(timer);
-    timer = null;
-    $("play").textContent = "play";
-  }
-
-  function play() {
-    stop();
-    let k = cur < 0 || cur >= levels.length - 1 ? 0 : cur;
-    drawLevel(k);
-    $("play").textContent = "pause";
-    // The graph only reports the total time, so real speed splits it evenly.
-    const step = speed === "real" ? runMs / levels.length : 420;
-    timer = setInterval(() => { if (++k >= levels.length) return stop(); drawLevel(k); }, step);
   }
 
   function newPuzzle() {
@@ -129,16 +107,13 @@ export function mountSudoku(root) {
       const input = new s.ort.Tensor("int64", BigInt64Array.from(prefix, BigInt), [1, prefix.length]);
       const t0 = performance.now();
       const out = await s.session.run({ prefix: input });
-      const ms = (runMs = performance.now() - t0);
+      const ms = performance.now() - t0;
       levels = decodeLevels(toNumbers(out.tokens));
       if (levels.length !== 12) throw new Error(`unexpected output shape ${out.tokens.dims}`);
-      $("slider").max = String(levels.length);
-      $("slider").disabled = $("play").disabled = false;
-      cur = -1;
       $("bar").hidden = true;
       $("hint").hidden = true;
       $("status").textContent = `done in ${(ms / 1000).toFixed(1)} s on your ${s.backend === "webgpu" ? "GPU" : "CPU"}`;
-      play();
+      playback.start(levels.length, ms);
       const r = $("result").getBoundingClientRect();
       if (r.top > innerHeight - 120) $("result").scrollIntoView({ behavior: "smooth" });
     } catch (e) {
@@ -153,13 +128,6 @@ export function mountSudoku(root) {
   $("clear").addEventListener("click", () => { puzzle = Array(81).fill(0); drawInput(); });
   $("diff").addEventListener("change", newPuzzle);
   $("solve").addEventListener("click", run);
-  $("play").addEventListener("click", () => (timer ? stop() : play()));
-  root.querySelectorAll("[data-speed]").forEach((b) => b.addEventListener("click", () => {
-    speed = b.dataset.speed;
-    root.querySelectorAll("[data-speed]").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
-    if (levels.length) { cur = -1; play(); }
-  }));
-  $("slider").addEventListener("input", () => { stop(); drawLevel(+$("slider").value - 1); });
   newPuzzle();
   $("output").innerHTML = `<div class="board empty">${puzzle.map((_, i) => `<div class="${cellClass(i)}"></div>`).join("")}</div>`;
 }

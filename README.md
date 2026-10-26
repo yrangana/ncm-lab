@@ -2,14 +2,14 @@
 
 Browser demos of Next-Concept Modeling ([paper](https://arxiv.org/abs/2610.14162), [code](https://github.com/HazyResearch/ncm)): small models that draft the whole answer at once, then refine it. Live at https://ncmlab.vercel.app.
 
-By Yasiru Rangana ([yrangana](https://github.com/yrangana)).
+By [Yasiru Rangana](https://yasirurangana.com).
 
 ## Demos
 
 | Demo | Status |
 |---|---|
-| [Sudoku in 12 passes](https://ncmlab.vercel.app/playground/) | Live. On puzzles with one solution the public checkpoints solve 49/50 easy, 49/50 medium, 42/50 hard. |
-| Stories (TinyStories) | Next |
+| [Sudoku in 12 passes](https://ncmlab.vercel.app/sudoku/) | Live. On puzzles with one solution the public checkpoints solve 49/50 easy, 49/50 medium, 42/50 hard. |
+| [A story in 12 passes](https://ncmlab.vercel.app/stories/) | Live. TinyStories checkpoint, 128 tokens, about 570 MB download. |
 | Sinhala to English translator | Planned, `research/sinhala/` |
 | Nonograms, KenKen, timetables | Planned, `research/puzzles/` |
 

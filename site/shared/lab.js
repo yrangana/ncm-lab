@@ -59,10 +59,13 @@ export function loadOrt() {
   return ortPromise;
 }
 
+export const modelUrl = (task, file) => `${MODELS}/${task}/${file}`;
+
+export const fetchJson = async (url) => JSON.parse(new TextDecoder().decode(await fetchCached(url)));
+
 export async function loadTask(task, onProgress) {
-  const base = `${MODELS}/${task}`;
-  const graph = await fetchCached(`${base}/model.onnx`, (g, t, c) => onProgress?.("graph", g, t, c));
-  const data = await fetchCached(`${base}/model.onnx.data`, (g, t, c) => onProgress?.("weights", g, t, c));
+  const graph = await fetchCached(modelUrl(task, "model.onnx"), (g, t, c) => onProgress?.("graph", g, t, c));
+  const data = await fetchCached(modelUrl(task, "model.onnx.data"), (g, t, c) => onProgress?.("weights", g, t, c));
   const ort = await loadOrt();
   const dev = await detectDevice();
   ort.env.wasm.numThreads = dev.threads;

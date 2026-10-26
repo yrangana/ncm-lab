@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>A story in 12 passes · ncm-lab</title>
+  <meta name="description" content="Watch a small Next-Concept Model write a short story in 12 passes, in your browser.">
+  <link rel="canonical" href="https://ncmlab.vercel.app/stories/">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ncmlab.vercel.app/stories/">
+  <meta property="og:title" content="A story in 12 passes">
+  <meta property="og:description" content="Watch a small Next-Concept Model write a short story in 12 passes, in your browser.">
+  <meta property="og:image" content="https://ncmlab.vercel.app/og-stories.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.svg">
+  <link rel="stylesheet" href="/shared/styles.css">
+</head>
+<body>
+  <div class="wrap">
+    <header id="hdr"></header>
+    <h1>A story in 12 passes</h1>
+    <p class="lead">A small model writes a whole 128-token story at once, starting from a single token and adding detail each pass. It runs on your device. <a href="#about">How it works</a></p>
+
+    <section id="stories"></section>
+
+    <section class="prose about" id="about">
+      <h2>About this demo</h2>
+      <p>Most language models write one token at a time, left to right. A Next-Concept Model drafts the whole text at once, then refines it. Pass 1 is a single token. Each later pass is longer and sharper, and pass 12 is the finished 128-token story. In early passes you can already spot names and the mood. Later passes fix the wording.</p>
+      <p>The model runs once and returns all 12 passes, then the page plays them back. It runs in your browser, so nothing is sent anywhere. The model is about 570 MB, downloaded once. It was trained on TinyStories, short stories for young children, so expect simple plots and the odd wrong word. Stories stop at 128 tokens, often mid-sentence.</p>
+      <p>Based on <a href="https://arxiv.org/abs/2610.14162">Kumbong et al., 2026</a> (<a href="https://github.com/HazyResearch/ncm">code</a>). Model exported to ONNX by <a href="https://huggingface.co/mrfakename/ncm-webgpu-weights">mrfakename</a>. Both MIT. Source: <a href="https://github.com/yrangana/ncm-lab">github.com/yrangana/ncm-lab</a>.</p>
+    </section>
+
+    <footer class="foot">
+      NCM by Hazy Research and Together AI (MIT). ONNX exports by mrfakename (MIT). <a href="https://yasirurangana.com">yasirurangana.com</a> · <a href="https://github.com/yrangana/ncm-lab">source</a>
+    </footer>
+  </div>
+  <script type="module" src="./main.js"></script>
+</body>
+</html>

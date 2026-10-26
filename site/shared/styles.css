@@ -93,8 +93,22 @@ button.primary:hover { opacity: .85; }
 .stats { text-align: center; color: var(--muted); margin-top: 12px; }
 .stats b { color: var(--ink); font-weight: 400; }
 
-.traj { line-height: 1.8; min-height: 5.4em; padding: 10px 12px; background: var(--raise); }
-.traj .w.new { background: var(--hl); }
+.stack > .panel + .panel { margin-top: 28px; }
+.stack .levels { margin: 4px 0 14px; }
+.row .seg { margin-top: 0; }
+.stack .seg { text-align: left; }
+.stack .legend { justify-content: flex-start; }
+.opts { display: grid; grid-template-columns: max-content 1fr; gap: 10px 16px; align-items: center; }
+.opts > span { font-size: 15px; }
+.opts .seg { margin: 0; }
+.opts .seg button:first-child { margin-left: 0; }
+@media (max-width: 560px) { .opts { grid-template-columns: 1fr; gap: 4px; } .opts .seg { margin-bottom: 8px; } }
+.legend u { text-underline-offset: 3px; margin-right: 6px; color: var(--ink); }
+.story u { text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.story { white-space: pre-wrap; font-size: 19px; line-height: 1.7; min-height: 13em; padding: 14px 18px; border: 1px solid var(--line); }
+.story .new { background: color-mix(in srgb, var(--hl) 55%, transparent); }
+.story.empty { display: grid; place-items: center; color: var(--muted); font-style: italic; }
+.story.empty::after { content: "press Write a story"; }
 
 .about { margin-top: 48px; padding-top: 4px; border-top: 1px solid var(--line); }
 .prose h2 { font-size: 20px; font-weight: 400; margin: 28px 0 6px; }

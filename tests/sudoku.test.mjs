@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { conflicts, countSolutions, decodeLevel, decodeLevels, encodeBoard, generate, isSolved, solve } from "../site/playground/sudoku-core.js";
+import { conflicts, countSolutions, decodeLevel, decodeLevels, encodeBoard, generate, isSolved, solve } from "../site/sudoku/sudoku-core.js";
 import { mulberry32 } from "../site/shared/lab.js";
 
 // Fixture 1 prefix from mrfakename/ncm-webgpu-weights sudoku-easy/fixtures.json
