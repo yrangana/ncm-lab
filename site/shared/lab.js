@@ -14,6 +14,7 @@ async function detectDevice() {
   return { webgpu, threads };
 }
 
+// Writes the download into one buffer when the size is known, so it is not held twice while joining chunks.
 // caches is missing outside secure contexts, so the cache is optional.
 async function fetchCached(url, onProgress) {
   const cache = await globalThis.caches?.open(CACHE).catch(() => null);
@@ -27,18 +28,24 @@ async function fetchCached(url, onProgress) {
   if (!res.ok) throw new Error(`download failed (${res.status}) for ${url}`);
   const total = Number(res.headers.get("content-length")) || 0;
   const reader = res.body.getReader();
-  const chunks = [];
+  let buf = total ? new Uint8Array(total) : null;
+  let chunks = [];
   let got = 0;
   for (;;) {
     const { done, value } = await reader.read();
     if (done) break;
-    chunks.push(value);
+    // content-length can be wrong (compressed bodies); fall back to collecting chunks.
+    if (buf && got + value.length > total) { chunks = [buf.subarray(0, got)]; buf = null; }
+    if (buf) buf.set(value, got);
+    else chunks.push(value);
     got += value.length;
     onProgress?.(got, total, false);
   }
-  const buf = new Uint8Array(got);
-  let o = 0;
-  for (const c of chunks) { buf.set(c, o); o += c.length; }
+  if (!buf) {
+    buf = new Uint8Array(got);
+    let o = 0;
+    for (const c of chunks) { buf.set(c, o); o += c.length; }
+  } else if (got < total) buf = buf.slice(0, got);
   await cache?.put(url, new Response(buf)).catch(() => {});
   return buf;
 }
