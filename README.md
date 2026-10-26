@@ -9,7 +9,7 @@ By [Yasiru Rangana](https://yasirurangana.com).
 | Demo | Status |
 |---|---|
 | [Sudoku in 12 passes](https://ncmlab.vercel.app/sudoku/) | Live. On puzzles with one solution the public checkpoints solve 49/50 easy, 49/50 medium, 42/50 hard. |
-| [A story in 12 passes](https://ncmlab.vercel.app/stories/) | Live. TinyStories checkpoint, 128 tokens, about 570 MB download. |
+| [A story in 12 passes](https://ncmlab.vercel.app/stories/) | Live. TinyStories checkpoint, 128 tokens, 4-bit build (260 MB, [yrangana/ncm-lab-models](https://huggingface.co/yrangana/ncm-lab-models)). |
 | Sinhala to English translator | Planned, `research/sinhala/` |
 | Nonograms, KenKen, timetables | Planned, `research/puzzles/` |
 
@@ -36,3 +36,4 @@ Deploy: `make vercel` (Vercel CLI, serves `site/` with COOP/COEP headers from `v
 
 - NCM: Kumbong, Khare, Mlauzi, Woen, Ding, Buchanan, Arora, Mirhoseini, Ré (2026). MIT.
 - ONNX exports: [mrfakename/ncm-webgpu-weights](https://huggingface.co/mrfakename/ncm-webgpu-weights). MIT.
+- Smaller builds: `tools/quantize.py` (`uv run --group quant`), published at [yrangana/ncm-lab-models](https://huggingface.co/yrangana/ncm-lab-models).

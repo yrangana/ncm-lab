@@ -6,9 +6,10 @@ const TEMPS = { low: 0.6, medium: 0.8, high: 1 };
 // Each appears in 10 to 22% of random stories (40 sampled), so 10 drafts find it 65 to 92% of the time.
 const TOPICS = ["dog", "ball", "toy", "tree", "car", "park"];
 const DRAFTS = 10;
-// Phones kill tabs well below the ~2.5 GB this model needs while loading.
+const TASK = "tinystories-q4";
+// Older phones kill tabs below the ~1 GB this model needs while loading.
 const PHONE = navigator.userAgentData?.mobile ?? (/iPhone|iPad|Android/.test(navigator.userAgent) || (navigator.maxTouchPoints > 1 && /Mac/.test(navigator.userAgent)));
-const WARN = "This model needs about 2.5 GB of memory while it loads. Phone browsers usually close the page. Try it on a desktop.";
+const WARN = "This model needs about 1 GB of memory while it loads. Older phones may close the page.";
 const esc = (s) => s.replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" })[c]);
 const seg = (name, label, opts, on, shown = true, extra = "") =>
   `<div class="seg" role="group" aria-label="${label}">${shown ? label : ""}${opts.map((o) => `<button aria-pressed="${o === on}" data-${name}="${o}">${o}</button>`).join("")}${extra}</div>`;
@@ -23,7 +24,7 @@ export function mountStories(root) {
         <span>Randomness</span>${seg("temp", "randomness", Object.keys(TEMPS), "medium", false)}
       </div>
       <p class="hint" data-why hidden>The model can't take a prompt, so it writes up to ${DRAFTS} drafts and keeps the first that uses your word.</p>
-      <div class="row" style="margin-top:16px"><button class="primary" data-go>Write a story</button><span class="hint${PHONE ? " warn" : ""}" data-hint>${PHONE ? WARN : "first run downloads 570 MB, best on a desktop"}</span></div>
+      <div class="row" style="margin-top:16px"><button class="primary" data-go>Write a story</button><span class="hint${PHONE ? " warn" : ""}" data-hint>${PHONE ? WARN : "first run downloads 260 MB"}</span></div>
       <div class="bar" hidden><i data-bar></i></div>
       <div class="status" data-status></div>
     </div>
@@ -77,15 +78,15 @@ export function mountStories(root) {
 
   async function run() {
     if (PHONE && !task && !warned) {
-      if (!confirm(`${WARN}\n\nDownload 570 MB and try anyway?`)) return;
+      if (!confirm(`${WARN}\n\nDownload 260 MB and try?`)) return;
       warned = true;
     }
     $("go").disabled = true;
     $("status").textContent = "loading the model";
     try {
-      task ??= loadTask("tinystories", progress).catch((e) => { task = null; throw e; });
-      vocab ??= fetchJson(modelUrl("tinystories", "vocab.json"));
-      unigram ??= fetchJson(modelUrl("tinystories", "level0_unigram.json"));
+      task ??= loadTask(TASK, progress).catch((e) => { task = null; throw e; });
+      vocab ??= fetchJson(modelUrl(TASK, "vocab.json"));
+      unigram ??= fetchJson(modelUrl(TASK, "level0_unigram.json"));
       const [s, { bytes }, probs] = await Promise.all([task, vocab, unigram]);
       $("bar").hidden = true;
       $("hint").hidden = true;

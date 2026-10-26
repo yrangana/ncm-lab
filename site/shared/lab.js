@@ -1,7 +1,8 @@
 const ORT_VERSION = "1.23.0";
 const CDN = `https://cdn.jsdelivr.net/npm/onnxruntime-web@${ORT_VERSION}/dist/`;
 const CACHE = "ncm-lab-v1";
-const MODELS = "https://huggingface.co/mrfakename/ncm-webgpu-weights/resolve/main";
+// Smaller builds live in our own repo; the rest are the public exports.
+const REPOS = { "tinystories-q4": "yrangana/ncm-lab-models" };
 
 async function detectDevice() {
   let webgpu = false;
@@ -68,7 +69,7 @@ function loadOrt() {
   return ortPromise;
 }
 
-export const modelUrl = (task, file) => `${MODELS}/${task}/${file}`;
+export const modelUrl = (task, file) => `https://huggingface.co/${REPOS[task] || "mrfakename/ncm-webgpu-weights"}/resolve/main/${task}/${file}`;
 
 export const fetchJson = async (url) => JSON.parse(new TextDecoder().decode(await fetchCached(url)));
 

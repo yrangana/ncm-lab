@@ -26,8 +26,8 @@
     <section class="prose about" id="about">
       <h2>About this demo</h2>
       <p>Most language models write one token at a time, left to right. A Next-Concept Model drafts the whole text at once, then refines it. Pass 1 is a single token. Each later pass is longer and sharper, and pass 12 is the finished 128-token story. In early passes you can already spot names and the mood. Later passes fix the wording.</p>
-      <p>The model runs once and returns all 12 passes, then the page plays them back. It runs in your browser, so nothing is sent anywhere. The model is about 570 MB, downloaded once. It was trained on TinyStories, short stories for young children, so expect simple plots and the odd wrong word. Stories stop at 128 tokens, often mid-sentence.</p>
-      <p>Based on <a href="https://arxiv.org/abs/2610.14162">Kumbong et al., 2026</a> (<a href="https://github.com/HazyResearch/ncm">code</a>). Model exported to ONNX by <a href="https://huggingface.co/mrfakename/ncm-webgpu-weights">mrfakename</a>. Both MIT. Source: <a href="https://github.com/yrangana/ncm-lab">github.com/yrangana/ncm-lab</a>.</p>
+      <p>The model runs once and returns all 12 passes, then the page plays them back. It runs in your browser, so nothing is sent anywhere. The model is about 260 MB, downloaded once: a 4-bit build of the original 570 MB export that needs half the memory and writes stories that read just as well. It was trained on TinyStories, short stories for young children, so expect simple plots and the odd wrong word. Stories stop at 128 tokens, often mid-sentence.</p>
+      <p>Based on <a href="https://arxiv.org/abs/2610.14162">Kumbong et al., 2026</a> (<a href="https://github.com/HazyResearch/ncm">code</a>). Model exported to ONNX by <a href="https://huggingface.co/mrfakename/ncm-webgpu-weights">mrfakename</a>, 4-bit build at <a href="https://huggingface.co/yrangana/ncm-lab-models">yrangana/ncm-lab-models</a>. All MIT. Source: <a href="https://github.com/yrangana/ncm-lab">github.com/yrangana/ncm-lab</a>.</p>
     </section>
 
     <footer class="foot">
