@@ -1,5 +1,5 @@
 const ORT_VERSION = "1.23.0";
-const ORT_BASES = ["/vendor/ort/", `https://cdn.jsdelivr.net/npm/onnxruntime-web@${ORT_VERSION}/dist/`];
+const CDN = `https://cdn.jsdelivr.net/npm/onnxruntime-web@${ORT_VERSION}/dist/`;
 const CACHE = "ncm-lab-v1";
 const MODELS = "https://huggingface.co/mrfakename/ncm-webgpu-weights/resolve/main";
 
@@ -46,7 +46,9 @@ export async function fetchCached(url, onProgress) {
 let ortPromise = null;
 export function loadOrt() {
   ortPromise ??= (async () => {
-    for (const base of ORT_BASES) {
+    // site/vendor (make vendor) only exists locally. wasmPaths must be absolute: ORT resolves it against its own URL.
+    const local = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+    for (const base of local ? [`${location.origin}/vendor/ort/`, CDN] : [CDN]) {
       try {
         const ort = await import(`${base}ort.webgpu.bundle.min.mjs`);
         ort.env.wasm.wasmPaths = base;

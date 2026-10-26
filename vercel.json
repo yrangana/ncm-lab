@@ -26,11 +26,6 @@
       "source": "/playground/:path*",
       "destination": "/sudoku/:path*",
       "permanent": true
-    },
-    {
-      "source": "/vendor/ort/:path*",
-      "destination": "https://cdn.jsdelivr.net/npm/onnxruntime-web@1.23.0/dist/:path*",
-      "permanent": false
     }
   ]
 }

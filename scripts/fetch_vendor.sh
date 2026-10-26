@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# onnxruntime-web into site/vendor/ort for local serving. Vercel redirects /vendor/ort to the CDN.
+# onnxruntime-web into site/vendor/ort for local serving. The live site loads it from jsDelivr.
 set -euo pipefail
 ORT_VERSION="${ORT_VERSION:-1.23.0}"
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
