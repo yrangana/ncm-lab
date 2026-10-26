@@ -57,6 +57,7 @@ button:disabled, input:disabled { opacity: .45; cursor: default; background: var
 button.primary { font-size: 15px; padding: 10px 22px; background: var(--ink); color: var(--bg); }
 button.primary:hover { opacity: .85; }
 .hint { font-size: 14px; font-style: italic; color: var(--muted); }
+.hint.warn { color: var(--bad); font-style: normal; }
 .bar[hidden] { display: none; }
 .board.empty { position: relative; }
 .board.empty::after { content: "press Solve"; position: absolute; inset: 0; display: grid; place-items: center; font-style: italic; color: var(--muted); background: color-mix(in srgb, var(--bg) 70%, transparent); }
