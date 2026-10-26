@@ -1,7 +1,7 @@
 // Boards are 81 numbers, 0 = empty.
 
-export const SEP = 10;
-export const EDGE = 11;
+const SEP = 10;
+const EDGE = 11;
 export const CLUES = { easy: 40, medium: 35, hard: 30 };
 
 // 11, rows joined by 10, 11 (91 tokens)

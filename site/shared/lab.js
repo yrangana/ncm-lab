@@ -3,7 +3,7 @@ const CDN = `https://cdn.jsdelivr.net/npm/onnxruntime-web@${ORT_VERSION}/dist/`;
 const CACHE = "ncm-lab-v1";
 const MODELS = "https://huggingface.co/mrfakename/ncm-webgpu-weights/resolve/main";
 
-export async function detectDevice() {
+async function detectDevice() {
   let webgpu = false;
   try {
     const a = await navigator.gpu?.requestAdapter();
@@ -15,7 +15,7 @@ export async function detectDevice() {
 }
 
 // caches is missing outside secure contexts, so the cache is optional.
-export async function fetchCached(url, onProgress) {
+async function fetchCached(url, onProgress) {
   const cache = await globalThis.caches?.open(CACHE).catch(() => null);
   const hit = await cache?.match(url);
   if (hit) {
@@ -44,7 +44,7 @@ export async function fetchCached(url, onProgress) {
 }
 
 let ortPromise = null;
-export function loadOrt() {
+function loadOrt() {
   ortPromise ??= (async () => {
     // site/vendor (make vendor) only exists locally. wasmPaths must be absolute: ORT resolves it against its own URL.
     const local = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);

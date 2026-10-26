@@ -7,8 +7,8 @@ const TEMPS = { low: 0.6, medium: 0.8, high: 1 };
 const TOPICS = ["dog", "ball", "toy", "tree", "car", "park"];
 const DRAFTS = 10;
 const esc = (s) => s.replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" })[c]);
-const seg = (name, label, opts, on, shown = true) =>
-  `<div class="seg" role="group" aria-label="${label}">${shown ? label : ""}${opts.map((o) => `<button aria-pressed="${o === on}" data-${name}="${o}">${o}</button>`).join("")}</div>`;
+const seg = (name, label, opts, on, shown = true, extra = "") =>
+  `<div class="seg" role="group" aria-label="${label}">${shown ? label : ""}${opts.map((o) => `<button aria-pressed="${o === on}" data-${name}="${o}">${o}</button>`).join("")}${extra}</div>`;
 
 export function mountStories(root) {
   root.innerHTML = `
@@ -33,7 +33,7 @@ export function mountStories(root) {
       </div>
       <div class="story empty" data-text></div>
       <div class="legend"><span><i class="changed"></i>new this pass</span><span data-key hidden><u data-word></u>your topic</span></div>
-      ${seg("speed", "speed", ["real", "slow"], "real")}
+      ${seg("speed", "speed", ["real", "slow"], "real", true, '<button class="snd" data-sound>sound off</button>')}
     </div>
     </div>`;
 

@@ -34,7 +34,7 @@ export function mountSudoku(root) {
         <div>
           <div class="stats" data-stats></div>
           <div class="legend"><span><i class="clue">4</i>given</span><span><i class="gen">4</i>model</span><span><i class="bad">4</i>breaks a rule</span><span><i class="changed"></i>just changed</span></div>
-          <div class="seg" role="group" aria-label="Playback speed">speed<button aria-pressed="true" data-speed="real">real</button><button aria-pressed="false" data-speed="slow">slow</button></div>
+          <div class="seg" role="group" aria-label="Playback speed">speed<button aria-pressed="true" data-speed="real">real</button><button aria-pressed="false" data-speed="slow">slow</button><button class="snd" data-sound>sound off</button></div>
         </div>
       </div>
     </div>`;
