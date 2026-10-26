@@ -1,12 +1,19 @@
 # ncm-lab
 
-Browser demos of Next-Concept Modeling ([paper](https://arxiv.org/abs/2610.14162), [code](https://github.com/HazyResearch/ncm)). Live at https://ncmlab.vercel.app.
+Browser demos of Next-Concept Modeling ([paper](https://arxiv.org/abs/2610.14162), [code](https://github.com/HazyResearch/ncm)): small models that draft the whole answer at once, then refine it. Live at https://ncmlab.vercel.app.
 
 By Yasiru Rangana ([yrangana](https://github.com/yrangana)).
 
-## Sudoku in 12 passes
+## Demos
 
-A small NCM fills the whole grid at once, then corrects it over 12 passes. It runs in the browser with onnxruntime-web, on WebGPU or wasm. Puzzles are generated with a unique solution. On those, the public checkpoints solve 49/50 easy, 49/50 medium and 42/50 hard.
+| Demo | Status |
+|---|---|
+| [Sudoku in 12 passes](https://ncmlab.vercel.app/playground/) | Live. On puzzles with one solution the public checkpoints solve 49/50 easy, 49/50 medium, 42/50 hard. |
+| Stories (TinyStories) | Next |
+| Sinhala to English translator | Planned, `research/sinhala/` |
+| Nonograms, KenKen, timetables | Planned, `research/puzzles/` |
+
+Everything runs in the browser with onnxruntime-web, on WebGPU or wasm.
 
 ## Run locally
 
