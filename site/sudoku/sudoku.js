@@ -1,6 +1,6 @@
 import { loadTask, mulberry32, toNumbers } from "/shared/lab.js";
 import { player } from "/shared/player.js";
-import { CLUES, conflicts, countClues, decodeLevels, encodeBoard, generate, isSolved } from "./sudoku-core.js";
+import { CLUES, cellClass, conflicts, countClues, decodeLevels, encodeBoard, generate, isSolved } from "./sudoku-core.js";
 
 export function mountSudoku(root) {
   root.innerHTML = `
@@ -45,8 +45,6 @@ export function mountSudoku(root) {
   const sessions = {};
   const playback = player(root, drawLevel);
   let seed = 7;
-
-  const cellClass = (i) => `cell${i % 9 === 2 || i % 9 === 5 ? " bx" : ""}${Math.floor(i / 9) === 2 || Math.floor(i / 9) === 5 ? " by" : ""}`;
 
   function drawInput() {
     const el = $("input");

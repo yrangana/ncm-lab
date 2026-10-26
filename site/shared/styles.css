@@ -108,3 +108,14 @@ button.primary:hover { opacity: .85; }
 .about { margin-top: 48px; padding-top: 4px; border-top: 1px solid var(--line); }
 .prose h2 { font-size: 20px; font-weight: 400; margin: 28px 0 6px; }
 .prose p { margin: 0 0 12px; }
+
+.hero { display: grid; grid-template-columns: 300px 1fr; gap: 28px; align-items: start; margin: 8px 0 36px; }
+.hero > a { text-decoration: none; color: inherit; }
+.hero .board { max-width: 300px; }
+.hero .cell { font-size: 15px; }
+.story.mini { font-size: 16px; line-height: 1.6; min-height: 0; height: 300px; overflow: hidden; mask-image: linear-gradient(#000 85%, transparent); }
+.cap { grid-column: 1 / -1; font-size: 14px; font-style: italic; color: var(--muted); }
+.cap::before { content: "Figure. "; font-style: normal; font-weight: 700; color: var(--ink); }
+.ls i { display: block; font-size: 14px; color: var(--muted); }
+.next { font-size: 15px; font-style: italic; color: var(--muted); margin: 18px 0 0; }
+@media (max-width: 640px) { .hero { grid-template-columns: 1fr; } .hero .board { margin: 0 auto; } .story.mini { height: 17em; } }

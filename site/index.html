@@ -17,24 +17,26 @@
 </head>
 <body>
   <div class="wrap">
-    <header id="hdr"></header>
+    <header data-hdr></header>
     <h1>Next-Concept Modeling demos</h1>
     <p class="lead">Small models that write the whole answer at once, then refine it. They run in your browser.</p>
 
+    <figure class="hero">
+      <a href="/sudoku/" aria-label="Open the Sudoku demo"><div data-board></div></a>
+      <a href="/stories/" aria-label="Open the Stories demo"><div class="story mini" data-story></div></a>
+      <figcaption class="cap">One real run of each model, replayed: <span data-pass>pass 1 of 12</span>. Red cells break a Sudoku rule. Shaded words are new in that pass.</figcaption>
+    </figure>
+
     <ul class="ls">
-      <li><a href="/sudoku/">Sudoku in 12 passes</a><span>watch a model solve a puzzle and fix its own mistakes</span><span class="st live">try it</span></li>
-      <li><a href="/stories/">A story in 12 passes</a><span>watch a model write a short story, rough to fine</span><span class="st live">try it</span></li>
-      <li><span>Sinhala to English</span><span>a small translator</span><span class="st">planned</span></li>
-      <li><span>More puzzles</span><span>nonograms, KenKen, timetables</span><span class="st">planned</span></li>
+      <li><a href="/sudoku/">Sudoku in 12 passes</a><span>watch a model solve a puzzle and fix its own mistakes <i>150 MB, under a second on a GPU</i></span><span class="st live">try it</span></li>
+      <li><a href="/stories/">A story in 12 passes</a><span>watch a model write a short story, rough to fine <i>260 MB, desktop recommended</i></span><span class="st live">try it</span></li>
     </ul>
+    <p class="next">Next: a Sinhala to English translator, and more puzzles (nonograms, KenKen, timetables).</p>
 
     <footer class="foot">
       NCM by Hazy Research and Together AI (MIT). ONNX exports by mrfakename (MIT). <a href="https://yasirurangana.com">yasirurangana.com</a> · <a href="https://github.com/yrangana/ncm-lab">source</a>
     </footer>
   </div>
-  <script type="module">
-    import { mountHeader } from "/shared/lab.js";
-    mountHeader(document.getElementById("hdr"));
-  </script>
+  <script type="module" src="/home.js"></script>
 </body>
 </html>

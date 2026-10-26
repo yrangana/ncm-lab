@@ -4,6 +4,9 @@ const SEP = 10;
 const EDGE = 11;
 export const CLUES = { easy: 40, medium: 35, hard: 30 };
 
+// bx/by mark the thick lines after columns and rows 3 and 6.
+export const cellClass = (i) => `cell${i % 9 === 2 || i % 9 === 5 ? " bx" : ""}${Math.floor(i / 9) === 2 || Math.floor(i / 9) === 5 ? " by" : ""}`;
+
 // 11, rows joined by 10, 11 (91 tokens)
 export function encodeBoard(board) {
   if (board.length !== 81) throw new Error("board must have 81 cells");
