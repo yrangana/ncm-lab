@@ -23,6 +23,11 @@
   ],
   "redirects": [
     {
+      "source": "/playground/",
+      "destination": "/sudoku/",
+      "permanent": true
+    },
+    {
       "source": "/playground/:path*",
       "destination": "/sudoku/:path*",
       "permanent": true
