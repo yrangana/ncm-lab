@@ -2,7 +2,7 @@
 
 Browser demos of Next-Concept Modeling ([paper](https://arxiv.org/abs/2610.14162), [code](https://github.com/HazyResearch/ncm)): small models that draft the whole answer at once, then refine it. Live at https://ncmlab.vercel.app.
 
-By [Yasiru Rangana](https://yasirurangana.com).
+By [Yasiru Rangana](https://yasirurangana.com). Write-up: [Running Next-Concept Modeling in the browser](https://yasirurangana.com/articles/ncm-in-the-browser).
 
 ## Demos
 
